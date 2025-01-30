@@ -1,7 +1,9 @@
 module GameOfLife
 
 # Write your package code here.
-include("bu.jl")
+include("life.jl")
+include("patterns.jl")
+
 using Makie
 using GLMakie
 using DSP
@@ -9,12 +11,11 @@ using LinearAlgebra
 using OffsetArrays
 using AbstractFFTs
 using BenchmarkTools
+using Images
+using Interpolations
 
-export create_life
-export life
-export wrap_matrix
-export conv2
-export growth
+export create_life, life, wrap_matrix, conv2, growth
+export pattern
 
 
 end
