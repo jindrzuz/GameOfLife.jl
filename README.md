@@ -44,7 +44,43 @@ This Julia package implements basic functionality for simulating the growth of c
 
 To install the package, simply run the following command in Julia's REPL:
 
+## Examples
 
+<div align="center">
+  <img src="images/example_pulsar.gif" width="400">
+  <img src="images/example_dying_block.gif" width="400">
+  <img src="images/example_spiral.gif" width="400">
+</div>
+
+<table>
+  <tr>
+    <td>
+      <img src="images/example_pulsar.gif" width="400">
+    </td>
+    <td>
+      <p><b>Example 1: Pulsar</b><br>
+      This example shows a stable pulsating structure that continuously changes its shape over time.</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="images/example_dying_block.gif" width="400">
+    </td>
+    <td>
+      <p><b>Example 2: Dying Block</b><br>
+      Here, we observe an unstable configuration that eventually fades away due to lack of growth support.</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="images/example_spiral.gif" width="400">
+    </td>
+    <td>
+      <p><b>Example 3: Spiral Growth</b><br>
+      A self-sustaining spiral structure that continuously expands as the simulation progresses.</p>
+    </td>
+  </tr>
+</table>
 
 
 
