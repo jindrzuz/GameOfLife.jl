@@ -21,8 +21,8 @@ This Julia package implements basic functionality for simulating the growth of c
 3. **Kernel Convolution**:
    - A convolution kernel (`K`) is used to model interactions between cells and their neighbors.
    - This kernel is applied to the matrix to simulate the effect of surrounding cells on the growth of a particular cell.
-
-   <img src="images/kernel.png" alt="kernel" width="900">
+    <br>
+   <img src="images/kernel.png" alt="kernel" width="800" style="display: block; margin: auto;">
 
 4. **Growth Function**:
    - The growth of cells is calculated using a **bell function**, which models the influence of neighboring cells on a given cell.
@@ -36,8 +36,9 @@ This Julia package implements basic functionality for simulating the growth of c
     - The state of the matrix is visualized using **heatmaps** to show the density and evolution of cells over time. The matrix is updated and displayed at each iteration.
 
 ## Examples
-![Animace](images/example_pulsar.gif)
-<img src="images/example_pulsar.gif" width="600">
+<img src="images/example_pulsar.gif" width="400" style="display: block; margin: auto;">
+<img src="images/example_dying_block.gif" width="400" style="display: block; margin: auto;">
+<img src="images/example_spiral.gif" width="400" style="display: block; margin: auto;">
 
 ## Installation
 
