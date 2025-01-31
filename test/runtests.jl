@@ -2,5 +2,5 @@ using Lenia
 using Test
 
 @testset "Lenia.jl" begin
-    @test True
+    @test true
 end
