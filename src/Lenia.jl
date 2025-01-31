@@ -1,4 +1,4 @@
-module GameOfLife
+module Lenia
 
 # Write your package code here.
 include("life.jl")

@@ -1,6 +1,6 @@
-using GameOfLife
+using Lenia
 using Test
 
-@testset "GameOfLife.jl" begin
+@testset "Lenia.jl" begin
     # Write your tests here.
 end

@@ -1,4 +1,4 @@
-name = "GameOfLife"
+name = "Lenia"
 uuid = "34cd62bc-1d08-4a0c-9187-866c57ed52b7"
 authors = ["Zuzana Jindrova <jindzuz@fel.cvut.cz> and contributors"]
 version = "1.0.0-DEV"
@@ -14,7 +14,6 @@ Interpolations = "a98d9a8b-a2ab-59e6-89dd-64a1c18fca59"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"
 OffsetArrays = "6fe1bfb0-de20-5000-8ca7-80f57d26f881"
-Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 Strided = "5e0ebb24-38b0-5f93-81fe-25c709ecae67"
 
 [compat]
