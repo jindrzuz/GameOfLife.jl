@@ -1,34 +1,98 @@
+"""
+    display_matrix(A::Matrix{T}) where T
+    
+Transpose matrix A and reverse it along the second dimension.
+
+# Arguments
+- `A::Matrix{T}`: Matrix to be displayed.
+
+# Returns
+- `Matrix{T}`: Transposed and reversed matrix.
+"""
 function display_matrix(A)
     return reverse(transpose(A), dims = 2)
 end
 
-function wrap_matrix(A, Ksize)
+
+"""
+    wrap_matrix(A::Matrix{T}, Ksize::Integer) where T
+
+Wrap matrix A with padding of size Ksize.
+
+# Arguments
+- `A::Matrix{T}`: Matrix to be wrapped.
+- `Ksize::Integer`: Size of kernel.
+
+# Returns
+- `Matrix{T}`: Wrapped matrix.
+"""
+function wrap_matrix(A, Ksize::Integer)
     pad = div(Ksize, 2)
     padded = vcat(A[end-pad+1:end, :], A, A[1:pad, :])
     padded = hcat(padded[:, end-pad+1:end], padded, padded[:, 1:pad])
     return padded
 end
 
-function growth(U, Asize, m, s)
-#   return zeros(Asize, Asize) + Float64.((U.>=0.12) .&& (U.<=0.15)) - Float64.((U.<=0.12) .|| (U.>=0.15))
-  return bell(U, m, s)*2-ones(Asize, Asize)
+"""
+    growth(U::Matrix{T}, Asize::Integer) where T
+
+Calculate growth of matrix U.
+
+# Arguments
+- `U::Matrix{T}`: Matrix to calculate growth from.
+- `Asize::Integer`: Size of matrix.
+
+# Returns
+- `Matrix{T}`: Growth matrix.
+"""
+function growth(U  , Asize::Integer, m::Real, s::Real)
+    # return zeros(Asize, Asize) + Float64.((U.>=0.12) .&& (U.<=0.15)) - Float64.((U.<=0.12) .|| (U.>=0.15))
+    return bell.(U, m, s)*2-ones(Asize, Asize)
 end
 
-function update(A, K, ax, T, m, s)
+"""
+    update(A::Matrix{T}, K::Matrix{T}, ax, t::Real , m::Real, s::Real) where T
+
+Update matrix A.
+
+# Arguments
+- `A::Matrix{T}`: Matrix to be updated.
+- `K::Matrix{T}`: Kernel matrix.
+- `ax`: Axis.
+- `t::Real`: Parameter.
+- `m::Real`: Parameter.
+- `s::Real`: Parameter.
+
+# Returns
+- `Matrix{T}`: Updated matrix.
+"""
+function update(A::Matrix{T}, K::Matrix{T}, ax, t::Real , m::Real, s::Real) where T
     Asize = size(A)[1]
     Ksize = size(K)[1]
 
     A_padded = wrap_matrix(A, Ksize)
     U_padded = conv2(A_padded, K)
     padd = Int((size(U_padded)[1] - Asize)/2)
-    U = U_padded[padd+1:end-padd, padd+1:end-padd]  # Oříznutí na původní velikost
+    U = U_padded[padd+1:end-padd, padd+1:end-padd]  
 
-    A_new = clamp.(A + 1/T * growth(U, Asize, m, s), 0, 1)
+    A_new = clamp.(A + 1/t * growth(U, Asize, m, s), 0, 1)
     
     heatmap!(ax, display_matrix(A_new)) 
     return A_new
 end
 
+"""
+    conv2(A::Matrix{T}, B::Matrix{T}) where T
+
+Convolution of two matrices.
+
+# Arguments
+- `A::Matrix{T}`: Matrix A.
+- `B::Matrix{T}`: Matrix B.
+
+# Returns
+- `Matrix{T}`: Convolution of A and B.
+"""
 function conv2(A::Matrix{T}, B::Matrix{T}) where T
     sa, sb = size(A), size(B)
     At = zeros(T, sa[1]+sb[1]-1, sa[2]+sb[2]-1)
@@ -43,56 +107,59 @@ function conv2(A::Matrix{T}, B::Matrix{T}) where T
     return C
 end
 
-conv2(A::Matrix{T}, B::Matrix{T}) where {T<:Integer} =
-    round.(Int, conv2(float(A), float(B)))
-conv2(u::StridedVector{T}, v::StridedVector{T}, A::StridedMatrix{T}) where {T<:Integer} =
-    round.(Int, conv2(float(u), float(v), float(A)))
+"""
+    bell(x, m, s)
 
-bell(x, m, s) = exp.(-((x .- m) ./ s).^2 ./ 2)
+Bell function.
 
+# Arguments
+- `x`: Parameter.
+- `m`: Parameter.
+- `s`: Parameter.
 
-function create_life(Asize, n)
+# Returns
+- `Real`: Bell function.
+"""
+bell(x, m, s) = exp(-((x-m)/s)^2 / 2)
+_norm(x...) = sqrt(sum(x.^2))
+"""
+    create_life(Asize::Integer, n::Integer)
+
+Create life.
+
+# Arguments
+- `Asize::Integer`: Size of matrix.
+- `n::Integer`: Number of iterations.
+"""
+function create_life(Asize::Integer, n::Integer)
     A = zeros(Asize, Asize)
     scale_ = 1
-
-    #pocatecni poloha
     cx = 20
     cy = 20
-    C = pattern["orbium"]["cells"]
-    T = pattern["orbium"]["T"]
-    R = pattern["orbium"]["R"]
-    s = pattern["orbium"]["s"]
-    m = pattern["orbium"]["m"]
+    pattern_name = "pulsar"
+    C = pattern[pattern_name]["cells"]
+    T = pattern[pattern_name]["T"]
+    R = pattern[pattern_name]["R"]
+    s = pattern[pattern_name]["s"]
+    m = pattern[pattern_name]["m"]
     
-    C_resized = imresize(C, ratio = scale_)  # Pro interpolaci s parametrem order=0 (nejbližší soused)
+    C_resized = imresize(C, ratio = scale_)  
     
     R = R*scale_  
 
     A[cx+1:cx+size(C_resized, 1), cy+1:cy+size(C_resized, 2)] = C_resized
     
-    x = -R:R
-    y = -R:R
-    X = repeat(x, 1)
-    X = X*X'
-    D = abs.(X)/R
-    
-    K = (D .< 1) .* bell(D, 0.5, 0.15)
-    
-    # K = [
-    #     0 0 0 0 1 1 1 0 0 0 0;
-    #     0 0 1 1 1 1 1 1 1 0 0;
-    #     0 1 1 1 1 1 1 1 1 1 0;
-    #     0 1 1 1 1 1 1 1 1 1 0;
-    #     1 1 1 1 0 0 0 1 1 1 1;
-    #     1 1 1 1 0 0 0 1 1 1 1;
-    #     1 1 1 1 0 0 0 1 1 1 1;
-    #     0 1 1 1 1 1 1 1 1 1 0;
-    #     0 1 1 1 1 1 1 1 1 1 0;
-    #     0 0 1 1 1 1 1 1 1 0 0;
-    #     0 0 0 0 1 1 1 0 0 0 0
-    # ]
+    # R = 10
+    # T = 10
+    # m = 0.15
+    # s = 0.015
+    # A = rand(Asize, Asize)
 
-    K = K / sum(K)
+    R = 10
+    D = [_norm(x,y) for x in -R:R, y in -R:R] ./ R
+    D = bell.(D, 0.5, 0.15)
+
+    K = D / sum(D)
 
     fig = Figure(size = (600, 600))
     ax = Makie.Axis(fig[1, 1])
