@@ -1,32 +1,32 @@
 """
-    display_matrix(A::Matrix{T}) where T
-    
-Transpose matrix A and reverse it along the second dimension.
+    display_matrix(A::Matrix{Float64})
+
+Display matrix A in a way that the origin is in the top left corner.
 
 # Arguments
-- `A::Matrix{T}`: Matrix to be displayed.
+- `A::Matrix{Float64}`: Matrix to be displayed.
 
 # Returns
-- `Matrix{T}`: Transposed and reversed matrix.
+- `Matrix{Float64}`: Displayed matrix.
 """
-function display_matrix(A)
+function display_matrix(A::Matrix{Float64})
     return reverse(transpose(A), dims = 2)
 end
 
 
 """
-    wrap_matrix(A::Matrix{T}, Ksize::Integer) where T
+    wrap_matrix(A::Matrix{Float64}, Ksize::Integer)
 
-Wrap matrix A with padding of size Ksize.
+Wrap matrix A with zeros on the edges.
 
 # Arguments
-- `A::Matrix{T}`: Matrix to be wrapped.
+- `A::Matrix{Float64}`: Matrix to be wrapped.
 - `Ksize::Integer`: Size of kernel.
 
 # Returns
-- `Matrix{T}`: Wrapped matrix.
+- `Matrix{Float64}`: Wrapped matrix.
 """
-function wrap_matrix(A, Ksize::Integer)
+function wrap_matrix(A::Matrix{Float64}, Ksize::Integer)
     pad = div(Ksize, 2)
     padded = vcat(A[end-pad+1:end, :], A, A[1:pad, :])
     padded = hcat(padded[:, end-pad+1:end], padded, padded[:, 1:pad])
@@ -34,19 +34,20 @@ function wrap_matrix(A, Ksize::Integer)
 end
 
 """
-    growth(U::Matrix{T}, Asize::Integer) where T
+    growth(U::Matrix{Float64}, Asize::Integer, m::Real, s::Real)
 
-Calculate growth of matrix U.
+Calculate growth of matrix A.
 
 # Arguments
-- `U::Matrix{T}`: Matrix to calculate growth from.
-- `Asize::Integer`: Size of matrix.
+- `U::Matrix{Float64}`: Matrix.
+- `Asize::Integer`: Size of matrix A.
+- `m::Real`: Parameter.
+- `s::Real`: Parameter.
 
 # Returns
-- `Matrix{T}`: Growth matrix.
+- `Matrix{Float64}`: Growth of matrix A.
 """
-function growth(U  , Asize::Integer, m::Real, s::Real)
-    # return zeros(Asize, Asize) + Float64.((U.>=0.12) .&& (U.<=0.15)) - Float64.((U.<=0.12) .|| (U.>=0.15))
+function growth(U::Matrix{Float64}, Asize::Integer, m::Real, s::Real)
     return bell.(U, m, s)*2-ones(Asize, Asize)
 end
 
@@ -57,7 +58,7 @@ Update matrix A.
 
 # Arguments
 - `A::Matrix{T}`: Matrix to be updated.
-- `K::Matrix{T}`: Kernel matrix.
+- `K::Matrix{T}`: Kernel.
 - `ax`: Axis.
 - `t::Real`: Parameter.
 - `m::Real`: Parameter.
@@ -87,11 +88,11 @@ end
 Convolution of two matrices.
 
 # Arguments
-- `A::Matrix{T}`: Matrix A.
-- `B::Matrix{T}`: Matrix B.
+- `A::Matrix{T}`: Matrix.
+- `B::Matrix{T}`: Matrix.
 
 # Returns
-- `Matrix{T}`: Convolution of A and B.
+- `Matrix{T}`: Convolution of two matrices.
 """
 function conv2(A::Matrix{T}, B::Matrix{T}) where T
     sa, sb = size(A), size(B)
@@ -108,35 +109,50 @@ function conv2(A::Matrix{T}, B::Matrix{T}) where T
 end
 
 """
-    bell(x, m, s)
+    bell(x::Real, m::Real, s::Real)
 
-Bell function.
+Calculate bell function.
 
 # Arguments
-- `x`: Parameter.
-- `m`: Parameter.
-- `s`: Parameter.
+- `x::Real`: Parameter.
+- `m::Real`: Parameter.
+- `s::Real`: Parameter.
 
 # Returns
 - `Real`: Bell function.
 """
 bell(x, m, s) = exp(-((x-m)/s)^2 / 2)
-_norm(x...) = sqrt(sum(x.^2))
+
 """
-    create_life(Asize::Integer, n::Integer)
+    _norm(x...)
+
+Calculate norm of x.
+
+# Arguments
+- `x...`: Vector x.
+
+# Returns
+- `Real`: Norm of x.
+"""
+_norm(x...) = sqrt(sum(x.^2))
+
+
+"""
+    create_life(Asize::Integer, n::Integer, pattern_name::String, cx::Integer, cy::Integer, scale_::Integer)
 
 Create life.
 
 # Arguments
-- `Asize::Integer`: Size of matrix.
+- `Asize::Integer`: Size of matrix A.
 - `n::Integer`: Number of iterations.
+- `pattern_name::String`: Name of pattern.
+- `cx::Integer`: Parameter.
+- `cy::Integer`: Parameter.
+- `scale_::Integer`: Parameter.
 """
-function create_life(Asize::Integer, n::Integer)
+
+function create_life(Asize::Integer, n::Integer, pattern_name::String, cx::Integer, cy::Integer, scale_::Integer)
     A = zeros(Asize, Asize)
-    scale_ = 1
-    cx = 20
-    cy = 20
-    pattern_name = "pulsar"
     C = pattern[pattern_name]["cells"]
     T = pattern[pattern_name]["T"]
     R = pattern[pattern_name]["R"]
@@ -148,14 +164,8 @@ function create_life(Asize::Integer, n::Integer)
     R = R*scale_  
 
     A[cx+1:cx+size(C_resized, 1), cy+1:cy+size(C_resized, 2)] = C_resized
-    
-    # R = 10
-    # T = 10
-    # m = 0.15
-    # s = 0.015
-    # A = rand(Asize, Asize)
 
-    R = 10
+    R = 20
     D = [_norm(x,y) for x in -R:R, y in -R:R] ./ R
     D = bell.(D, 0.5, 0.15)
 
