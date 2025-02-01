@@ -13,8 +13,9 @@ using AbstractFFTs
 using BenchmarkTools
 using Images
 using Interpolations
+using Test
 
-export create_life, life, wrap_matrix, conv2, growth, compute_kernel
+export create_life, life, wrap_matrix, conv2, growth, compute_kernel, update
 export pattern
 
 

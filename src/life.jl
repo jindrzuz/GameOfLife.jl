@@ -59,7 +59,6 @@ Update matrix A.
 # Arguments
 - `A::Matrix{T}`: Matrix to be updated.
 - `K::Matrix{T}`: Kernel.
-- `ax`: Axis.
 - `t::Real`: Parameter.
 - `m::Real`: Parameter.
 - `s::Real`: Parameter.
@@ -67,7 +66,7 @@ Update matrix A.
 # Returns
 - `Matrix{T}`: Updated matrix.
 """
-function update(A::Matrix{T}, K::Matrix{T}, ax, t::Real , m::Real, s::Real) where T
+function update(A::Matrix{T}, K::Matrix{T}, t::Real , m::Real, s::Real) where T
     Asize = size(A)[1]
     Ksize = size(K)[1]
 
@@ -78,7 +77,6 @@ function update(A::Matrix{T}, K::Matrix{T}, ax, t::Real , m::Real, s::Real) wher
 
     A_new = clamp.(A + 1/t * growth(U, Asize, m, s), 0, 1)
     
-    heatmap!(ax, display_matrix(A_new)) 
     return A_new
 end
 
@@ -196,11 +194,10 @@ function create_life(Asize::Integer, n::Integer, pattern_name::String, cx::Integ
     display(fig) 
     
     for i in 1:n
-        A = update(A, K, ax, T, m, s)
+        A = update(A, K, T, m, s)
+        heatmap!(ax, display_matrix(A)) 
         sleep(0.1)
     end
 end
-
-
 
 
