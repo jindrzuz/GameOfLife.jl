@@ -27,7 +27,6 @@ Interpolations = "0.15.1"
 LinearAlgebra = "1.11.0"
 Makie = "0.22.1"
 OffsetArrays = "1.15.0"
-Plots = "1.40.7"
 Strided = "2.2.0"
 julia = "1.11"
 

@@ -14,7 +14,7 @@ using BenchmarkTools
 using Images
 using Interpolations
 
-export create_life, life, wrap_matrix, conv2, growth
+export create_life, life, wrap_matrix, conv2, growth, compute_kernel
 export pattern
 
 

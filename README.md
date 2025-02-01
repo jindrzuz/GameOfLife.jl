@@ -39,6 +39,12 @@ This Julia package implements basic functionality for simulating the growth of c
 
 To install the package, simply run the following command in Julia's REPL:
 
+```
+using Pkg
+
+Pkg.add(url = "https://github.com/jindrzuz/Lenia.jl")
+```
+
 ## Examples
 Examples of use available in the folder **scripts**.
 

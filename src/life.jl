@@ -138,6 +138,24 @@ _norm(x...) = sqrt(sum(x.^2))
 
 
 """
+    compute_kernel(R::Integer)
+
+Compute kernel.
+
+# Arguments
+- `R::Integer`: Parameter.
+
+# Returns
+- `Matrix{Float64}`: Kernel.
+"""
+function compute_kernel(R::Integer)
+    D = [_norm(x,y) for x in -R:R, y in -R:R] ./ R
+    D = bell.(D, 0.5, 0.15)
+    K = D / sum(D)
+    return K
+end
+
+"""
     create_life(Asize::Integer, n::Integer, pattern_name::String, cx::Integer, cy::Integer, scale_::Integer)
 
 Create life.
@@ -163,14 +181,15 @@ function create_life(Asize::Integer, n::Integer, pattern_name::String, cx::Integ
     
     R = R*scale_  
 
+    if size(C_resized, 1) > Asize || size(C_resized, 2) > Asize
+        error("Pattern is too big for the matrix")
+    end
+    if cx + size(C_resized, 1) > Asize || cy + size(C_resized, 2) > Asize
+        error("Pattern is out of bounds")
+    end
     A[cx+1:cx+size(C_resized, 1), cy+1:cy+size(C_resized, 2)] = C_resized
 
-    R = 20
-    D = [_norm(x,y) for x in -R:R, y in -R:R] ./ R
-    D = bell.(D, 0.5, 0.15)
-
-    K = D / sum(D)
-
+    K = compute_kernel(R)
     fig = Figure(size = (600, 600))
     ax = Makie.Axis(fig[1, 1])
     heatmap!(ax, display_matrix(A))
