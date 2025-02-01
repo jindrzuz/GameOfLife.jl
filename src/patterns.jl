@@ -4,7 +4,7 @@ pattern = Dict()
 
 pattern["pulsar"] = Dict(
     "name" => "Pulsar",
-    "R" => 15,
+    "R" => 20,
     "T" => 8,
     "m" => 0.12,
     "s" => 0.02,
@@ -51,7 +51,7 @@ pattern["dying_block"] = Dict(
 
 pattern["spiral"] = Dict(
     "name" => "Spiral",
-    "R" => 10,  # Maximální dosah pro ovlivnění okolí
+    "R" => 20,  # Maximální dosah pro ovlivnění okolí
     "T" => 12,  # Délka životnosti objektu
     "m" => 0.1,  # Tvar objektu
     "s" => 0.03, # Šířka rozptylu

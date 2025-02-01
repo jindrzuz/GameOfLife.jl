@@ -30,7 +30,7 @@ This Julia package implements basic functionality for simulating the growth of c
     <align="center">
     <img src="images/kernel.png" alt="kernel" width="600">
     </align>
-    
+
 4. **Growth Function**:
    - The growth of cells is calculated using a **bell function**, which models the influence of neighboring cells on a given cell.
    - The growth is continuous, meaning the state of each cell evolves smoothly, and this effect is influenced by parameters like `m` and `s`.

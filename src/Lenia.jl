@@ -15,7 +15,7 @@ using Images
 using Interpolations
 using Test
 
-export create_life, life, wrap_matrix, conv2, growth, compute_kernel, update
+export create_life, life, wrap_matrix, conv2, growth, compute_kernel, update, initial_A, display_matrix
 export pattern
 
 

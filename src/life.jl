@@ -154,6 +154,39 @@ function compute_kernel(R::Integer)
 end
 
 """
+    initial_A(Asize::Integer, pattern_name::String, cx::Integer, cy::Integer, scale_::Integer)
+
+Initialize matrix A.
+
+# Arguments
+- `Asize::Integer`: Size of matrix A.
+- `pattern_name::String`: Name of pattern.
+- `cx::Integer`: Position of pattern.
+- `cy::Integer`: Position od pattern.
+- `scale_::Integer`: Parameter.
+
+# Returns
+- `Matrix{Float64}`: Initialized matrix.
+"""
+function initial_A(Asize::Integer, pattern_name::String, cx::Integer, cy::Integer, scale_::Integer)
+    A = zeros(Asize, Asize)
+    C = pattern[pattern_name]["cells"]
+    
+    C_resized = imresize(C, ratio = scale_)  
+
+    if size(C_resized, 1) > Asize || size(C_resized, 2) > Asize
+        error("Pattern is too big for the matrix")
+    end
+    if cx + size(C_resized, 1) > Asize || cy + size(C_resized, 2) > Asize
+        error("Pattern is out of bounds")
+    end
+
+    A[cx+1:cx+size(C_resized, 1), cy+1:cy+size(C_resized, 2)] = C_resized
+    
+    return A
+end
+
+"""
     create_life(Asize::Integer, n::Integer, pattern_name::String, cx::Integer, cy::Integer, scale_::Integer)
 
 Create life.
@@ -168,32 +201,24 @@ Create life.
 """
 
 function create_life(Asize::Integer, n::Integer, pattern_name::String, cx::Integer, cy::Integer, scale_::Integer)
-    A = zeros(Asize, Asize)
-    C = pattern[pattern_name]["cells"]
-    T = pattern[pattern_name]["T"]
-    R = pattern[pattern_name]["R"]
     s = pattern[pattern_name]["s"]
     m = pattern[pattern_name]["m"]
+    T = pattern[pattern_name]["T"]
+    R = pattern[pattern_name]["R"]
     
-    C_resized = imresize(C, ratio = scale_)  
-    
-    R = R*scale_  
-
-    if size(C_resized, 1) > Asize || size(C_resized, 2) > Asize
-        error("Pattern is too big for the matrix")
+    if 2*R+1 > Asize
+        error("R is too big for the matrix")
     end
-    if cx + size(C_resized, 1) > Asize || cy + size(C_resized, 2) > Asize
-        error("Pattern is out of bounds")
-    end
-    A[cx+1:cx+size(C_resized, 1), cy+1:cy+size(C_resized, 2)] = C_resized
 
+    A = initial_A(Asize, pattern_name, cx, cy, scale_)
     K = compute_kernel(R)
+
     fig = Figure(size = (600, 600))
     ax = Makie.Axis(fig[1, 1])
     heatmap!(ax, display_matrix(A))
     display(fig) 
     
-    for i in 1:n
+    for _ in 1:n
         A = update(A, K, T, m, s)
         heatmap!(ax, display_matrix(A)) 
         sleep(0.1)
