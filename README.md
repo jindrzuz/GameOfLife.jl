@@ -1,5 +1,6 @@
 [![Build Status](https://github.com/jindrzuz/Lenia.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/jindrzuz/Lenia.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![Coverage](https://codecov.io/gh/jindrzuz/Lenia.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/jindrzuz/Lenia.jl)
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/jindrzuz/Lenia.jl/blob/master/LICENSE)
 
 
 # Lenia: Continuous Cellular Automaton in Julia
