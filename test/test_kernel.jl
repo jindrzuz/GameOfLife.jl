@@ -19,4 +19,13 @@
             @test sum(K[R+1, :]) ≈ sum(K[:, R+1])
         end
     end
+
+
+    @testset "kernel_sum" begin
+        for R in 3:10
+            K = compute_kernel(R)
+            @test isapprox(sum(K), 1, atol=1e-5) 
+        end
+    end
+    
 end

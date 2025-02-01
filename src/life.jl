@@ -100,10 +100,7 @@ function conv2(A::Matrix{T}, B::Matrix{T}) where T
     Bt[1:sb[1], 1:sb[2]] = B
     p = plan_fft(At)
     C = ifft((p*At).*(p*Bt))
-    if T <: Real
-        return real(C)
-    end
-    return C
+    return real(C)
 end
 
 """
@@ -205,7 +202,7 @@ function create_life(Asize::Integer, n::Integer, pattern_name::String, cx::Integ
     m = pattern[pattern_name]["m"]
     T = pattern[pattern_name]["T"]
     R = pattern[pattern_name]["R"]
-    
+
     if 2*R+1 > Asize
         error("R is too big for the matrix")
     end
