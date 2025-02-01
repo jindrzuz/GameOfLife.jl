@@ -1,3 +1,7 @@
+[![Build Status](https://github.com/jindrzuz/Lenia.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/jindrzuz/Lenia.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![Coverage](https://codecov.io/gh/jindrzuz/Lenia.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/jindrzuz/Lenia.jl)
+
+
 # Lenia: Continuous Cellular Automaton in Julia
 
 This package provides a simulation of a continuous version of the Game of Life, named **Lenia**, in Julia. Unlike the traditional Game of Life, which is based on a discrete grid, Lenia uses continuous space and time to simulate evolving "organisms". It allows for the creation of more dynamic, smooth, and realistic simulations of life-like structures. 
@@ -80,5 +84,3 @@ Examples of use available in the folder **scripts**.
 
 
 
-[![Build Status](https://github.com/jindrzuz/Lenia.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/jindrzuz/Lenia.jl/actions/workflows/CI.yml?query=branch%3Amain)
-[![Coverage](https://codecov.io/gh/jindrzuz/Lenia.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/jindrzuz/Lenia.jl)
