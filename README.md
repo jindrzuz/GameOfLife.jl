@@ -1,4 +1,4 @@
-[![In development documentation](https://img.shields.io/badge/docs-dev-blue.svg)](https://jindrzuz.io/Lenia.jl/dev)
+[![In development documentation](https://img.shields.io/badge/docs-dev-blue.svg)](https://jindrzuz.github.io/Lenia.jl/dev)
 [![Docs workflow Status](https://github.com/jindrzuz/Lenia.jl/actions/workflows/Docs.yml/badge.svg?branch=main)](https://github.com/jindrzuz/Lenia.jl/actions/workflows/Docs.yml?query=branch%3Amain)
 [![Build Status](https://github.com/jindrzuz/Lenia.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/jindrzuz/Lenia.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![Coverage](https://codecov.io/gh/jindrzuz/Lenia.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/jindrzuz/Lenia.jl)
