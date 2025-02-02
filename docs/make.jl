@@ -18,7 +18,7 @@ makedocs(;
   modules = [Lenia],
   doctest = true,
   linkcheck = true,
-  authors = "Martin Malenický <z.jindrova@email.cz>",
+  authors = "Zuzana Jindrová <z.jindrova@email.cz>",
   repo = "https://github.com/jindrzuz/Lenia.jl/blob/{commit}{path}#{line}",
   sitename = "Lenia.jl",
   format = Documenter.HTML(;
