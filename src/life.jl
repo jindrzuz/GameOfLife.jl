@@ -183,6 +183,26 @@ function initial_A(Asize::Integer, pattern_name::String, cx::Integer, cy::Intege
     return A
 end
 
+
+"""
+    load_pattern(name::String)
+
+Load pattern.
+
+# Arguments
+- `name::String`: Name of pattern.
+
+# Returns
+- `Tuple{Integer, Integer, Real, Real}`: Pattern.
+"""
+function load_pattern(name)
+    R = pattern[name]["R"]
+    T = pattern[name]["T"]
+    m = pattern[name]["m"]
+    s = pattern[name]["s"]
+    return R, T, m, s
+end
+
 """
     create_life(Asize::Integer, n::Integer, pattern_name::String, cx::Integer, cy::Integer, scale_::Integer)
 
@@ -198,10 +218,7 @@ Create life.
 """
 
 function create_life(Asize::Integer, n::Integer, pattern_name::String, cx::Integer, cy::Integer, scale_::Integer)
-    s = pattern[pattern_name]["s"]
-    m = pattern[pattern_name]["m"]
-    T = pattern[pattern_name]["T"]
-    R = pattern[pattern_name]["R"]
+    R, T, m, s = load_pattern(pattern_name)
 
     if 2*R+1 > Asize
         error("R is too big for the matrix")

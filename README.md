@@ -85,5 +85,19 @@ Examples of use available in the folder **scripts**.
   </tr>
 </table>
 
+## Benchmark
+Comparison of execution times between Python and Julia implementations. The function tested is the update function , which updates the matrix A during the lifetime. 
 
+#### Random matrix A and kernel K (20x20):
+| Resolution of A| Time Python [ms] | Time Julia -median [ms] |
+|----------------|:----------------:|:-----------------------:|
+| 100x100        |       13.598     |           2.298         |
+| 500x500        |    1 401.755     |          72.718         |
+| 1000x1000      |   21 103.500     |         280.456         |
 
+#### Examples:
+| Example        | Time Python [ms] | Time Julia -median [ms] |
+|----------------|:----------------:|:-----------------------:|
+| pulsar         |      311.087     |         25.453          |
+| spiral         |      395.791     |         32.870          |
+| dying block    |      164.123     |          8.603          |
