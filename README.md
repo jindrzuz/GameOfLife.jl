@@ -70,7 +70,7 @@ Examples of use available in the folder **scripts**.
       <img src="images/example_dying_block.gif" width="400">
     </td>
     <td>
-      <p><b>Example 2: Dying Block</b><br>
+      <p><b>Example 2: Dying block</b><br>
       Here, we observe an unstable configuration that eventually fades away due to lack of growth support.</p>
     </td>
   </tr>
@@ -79,7 +79,7 @@ Examples of use available in the folder **scripts**.
       <img src="images/example_spiral.gif" width="400">
     </td>
     <td>
-      <p><b>Example 3: Spiral Growth</b><br>
+      <p><b>Example 3: Spiral</b><br>
       A self-sustaining spiral structure that continuously expands as the simulation progresses.</p>
     </td>
   </tr>
@@ -89,15 +89,15 @@ Examples of use available in the folder **scripts**.
 Comparison of execution times between Python and Julia implementations. The function tested is the update function , which updates the matrix A during the lifetime. 
 
 #### Random matrix A and kernel K (20x20):
-| Resolution of A| Time Python [ms] | Time Julia -median [ms] |
-|----------------|:----------------:|:-----------------------:|
-| 100x100        |       13.598     |           2.298         |
-| 500x500        |    1 401.755     |          72.718         |
-| 1000x1000      |   21 103.500     |         280.456         |
+| Resolution of A | Time Python [ms] | Time Julia -median [ms] |
+|----------------:|:----------------:|:-----------------------:|
+| 100x100         |       13.598     |           2.298         |
+| 500x500         |    1 401.755     |          72.718         |
+| 1000x1000       |   21 103.500     |         280.456         |
 
 #### Examples:
-| Example        | Time Python [ms] | Time Julia -median [ms] |
-|----------------|:----------------:|:-----------------------:|
-| pulsar         |      311.087     |         25.453          |
-| spiral         |      395.791     |         32.870          |
-| dying block    |      164.123     |          8.603          |
+| Example         | Time Python [ms] | Time Julia -median [ms] |
+|----------------:|:----------------:|:-----------------------:|
+| Pulsar          |      311.087     |         25.453          |
+| Spiral          |      395.791     |         32.870          |
+| Dying block     |      164.123     |          8.603          |
