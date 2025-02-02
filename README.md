@@ -96,7 +96,7 @@ Comparison of execution times between Python and Julia implementations. The func
 | 1000x1000       |   21 103.500     |         280.456         |
 
 #### Examples:
-| Example         | Time Python [ms] | Time Julia -median [ms] |
+| Example name    | Time Python [ms] | Time Julia -median [ms] |
 |-----------------|:----------------:|:-----------------------:|
 | Pulsar          |      311.087     |         25.453          |
 | Spiral          |      395.791     |         32.870          |
