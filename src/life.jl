@@ -215,8 +215,8 @@ Create life.
 - `cx::Integer`: Parameter.
 - `cy::Integer`: Parameter.
 - `scale_::Integer`: Parameter.
-"""
 
+"""
 function create_life(Asize::Integer, n::Integer, pattern_name::String, cx::Integer, cy::Integer, scale_::Integer)
     R, T, m, s = load_pattern(pattern_name)
 
