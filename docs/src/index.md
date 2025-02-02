@@ -26,7 +26,7 @@ This Julia package implements basic functionality for simulating the growth of c
    - A convolution kernel (`K`) is used to model interactions between cells and their neighbors.
    - This kernel is applied to the matrix to simulate the effect of surrounding cells on the growth of a particular cell.
 
-   <img src="./images/kernel.png" alt="Kernel" width="600">
+  ![kernel](./images/kernel.png)
 
 4. **Growth Function**:
    - The growth of cells is calculated using a **bell function**, which models the influence of neighboring cells on a given cell.
@@ -52,35 +52,12 @@ Pkg.add(url = "https://github.com/jindrzuz/Lenia.jl")
 ## Examples
 Examples of use available in the folder **scripts**.
 
-<table>
-  <tr>
-    <td>
-      <img src="./images/example_pulsar.gif" width="400">
-    </td>
-    <td>
-      <p><b>Example 1: Pulsar</b><br>
-      This example shows a stable pulsating structure that continually changes shape over time until it reaches a steady state.</p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="./images/example_dying_block.gif" width="400">
-    </td>
-    <td>
-      <p><b>Example 2: Dying block</b><br>
-      Here, we observe an unstable configuration that eventually fades away due to lack of growth support.</p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="./images/example_spiral.gif" width="400">
-    </td>
-    <td>
-      <p><b>Example 3: Spiral</b><br>
-      A self-sustaining spiral structure that continuously expands as the simulation progresses.</p>
-    </td>
-  </tr>
-</table>
+|               |             |
+|:-------------:|:-----------:|
+|![example_pulsar](./images/example_pulsar.gif)| **Example 1 : Pulsar** This example shows a stable pulsating structure that continually changes shape over time until it reaches a steady state.|
+|![example_dying_block](./images/example_dying_block.gif)| **Example 2: Dying block** Here, we observe an unstable configuration that eventually fades away due to lack of growth support.| 
+|![example_spiral](./images/example_spiral.gif)| **Example 3: Spiral** A self-sustaining spiral structure that continuously expands as the simulation progresses.|
+
 
 ## Benchmark
 Comparison of execution times between Python and Julia implementations. The function tested is the update function , which updates the matrix A during the lifetime. 
