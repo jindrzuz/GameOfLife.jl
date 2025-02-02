@@ -26,8 +26,7 @@ This Julia package implements basic functionality for simulating the growth of c
    - A convolution kernel (`K`) is used to model interactions between cells and their neighbors.
    - This kernel is applied to the matrix to simulate the effect of surrounding cells on the growth of a particular cell.
 
-   <img src="GameOfLife/images/kernel.png" alt="Kernel" width="600">
-
+   <img src="./images/kernel.png" alt="Kernel" width="600">
 
 4. **Growth Function**:
    - The growth of cells is calculated using a **bell function**, which models the influence of neighboring cells on a given cell.
@@ -56,7 +55,7 @@ Examples of use available in the folder **scripts**.
 <table>
   <tr>
     <td>
-      <img src="GameOfLife/images/example_pulsar.gif" width="400">
+      <img src="./images/example_pulsar.gif" width="400">
     </td>
     <td>
       <p><b>Example 1: Pulsar</b><br>
@@ -65,7 +64,7 @@ Examples of use available in the folder **scripts**.
   </tr>
   <tr>
     <td>
-      <img src="GameOfLife/images/example_dying_block.gif" width="400">
+      <img src="./images/example_dying_block.gif" width="400">
     </td>
     <td>
       <p><b>Example 2: Dying block</b><br>
@@ -74,7 +73,7 @@ Examples of use available in the folder **scripts**.
   </tr>
   <tr>
     <td>
-      <img src="GameOfLife/images/example_spiral.gif" width="400">
+      <img src="./images/example_spiral.gif" width="400">
     </td>
     <td>
       <p><b>Example 3: Spiral</b><br>
