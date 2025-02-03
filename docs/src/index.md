@@ -49,15 +49,18 @@ Pkg.add(url = "https://github.com/jindrzuz/Lenia.jl")
 6. **Visualization**
     - The state of the matrix is visualized using **heatmaps** to show the density and evolution of cells over time. The matrix is updated and displayed at each iteration.
 
-
-## Examples
-Examples of use available in the folder **scripts**.
-
-|               |             |
-|:-------------:|:-----------:|
-|![example_pulsar](./images/example_pulsar.gif)| **Example 1 : Pulsar** This example shows a stable pulsating structure that continually changes shape over time until it reaches a steady state.|
-|![example_dying_block](./images/example_dying_block.gif)| **Example 2: Dying block** Here, we observe an unstable configuration that eventually fades away due to lack of growth support.| 
-|![example_spiral](./images/example_spiral.gif)| **Example 3: Spiral** A self-sustaining spiral structure that continuously expands as the simulation progresses.|
+## Usage
+There are one main function in packege `create_life` which creates a new life with given parameters and start visualization. The function can be use as follows:
+```julia
+using Lenia
+create_life(300, 200, "pulsar", 100, 100, 2)
+```
+or for random life:
+```julia
+using Lenia
+create_life(200, 100)
+```
+For more information about the parameters, please refer to the Reference.
 
 
 ## Benchmark
@@ -76,3 +79,15 @@ Comparison of execution times between Python and Julia implementations. The func
 | Pulsar          |      311.087     |         25.453          |
 | Spiral          |      395.791     |         32.870          |
 | Dying block     |      164.123     |          8.603          |
+
+
+## Examples
+Examples of use available in the folder **scripts**.
+
+|               |             |
+|:-------------:|:-----------:|
+|![example_pulsar](./images/example_pulsar.gif)| **Example 1 : Pulsar** This example shows a stable pulsating structure that continually changes shape over time until it reaches a steady state.|
+|![example_dying_block](./images/example_dying_block.gif)| **Example 2: Dying block** Here, we observe an unstable configuration that eventually fades away due to lack of growth support.| 
+|![example_spiral](./images/example_spiral.gif)| **Example 3: Spiral** A self-sustaining spiral structure that continuously expands as the simulation progresses.|
+
+

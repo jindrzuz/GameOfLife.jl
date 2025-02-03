@@ -60,14 +60,15 @@ Pkg.add(url = "https://github.com/jindrzuz/Lenia.jl")
 There are one main function in packege `create_life` which creates a new life with given parameters and start visualization. The function can be use as follows:
 ```julia
 using Lenia
-create_life(64, 100, "pulsar", 10, 10, 2)
+create_life(300, 200, "pulsar", 100, 100, 2)
 ```
 or for random life:
 ```julia
 using Lenia
-create_life(64, 100)
+create_life(200, 100)
 ```
 For more information about the parameters, please refer to the [documentation](https://jindrzuz.github.io/Lenia.jl/dev).
+More examples of using patterns can be found in the scripts folder.
 
 
 ## Benchmark
