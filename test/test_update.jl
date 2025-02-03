@@ -18,13 +18,8 @@
 
             A_new = update(A_init, rand(Ksize, Ksize), 10, 0.5, 0.15)
 
-            for _ in Asize*Asize/4
-                i = rand(1:Asize)
-                j = rand(1:Asize)
-                @test A_new[i, j] <= 1 && A_new[i, j] >= 0
-                @test A_init[i, j] <= 1 && A_init[i, j] >= 0
-            end
-
+            @test all(0 .<= A_new .<= 1)
+            @test all(0 .<= A_init .<= 1)
         end
     end
 

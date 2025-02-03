@@ -18,6 +18,16 @@ Lenia is inspired by the concept of cellular automata but takes a continuous app
 
 This Julia package implements basic functionality for simulating the growth of cells and applying kernel-based transformations to model the behavior of such organisms. It also provides tools for visualizing the evolution of the system over time.
 
+## Installation
+
+To install the package, simply run the following command in Julia's REPL:
+
+```
+using Pkg
+
+Pkg.add(url = "https://github.com/jindrzuz/Lenia.jl")
+```
+
 ## Algorithm
 
 1. **Matrix Representation**:
@@ -46,15 +56,36 @@ This Julia package implements basic functionality for simulating the growth of c
 6. **Visualization**
     - The state of the matrix is visualized using **heatmaps** to show the density and evolution of cells over time. The matrix is updated and displayed at each iteration.
 
-## Installation
-
-To install the package, simply run the following command in Julia's REPL:
-
+## Usage
+There are one main function in packege `create_life` which creates a new life with given parameters and start visualization. The function can be use as follows:
+```julia
+using Lenia
+create_life(64, 100, "pulsar", 10, 10, 2)
 ```
-using Pkg
-
-Pkg.add(url = "https://github.com/jindrzuz/Lenia.jl")
+or for random life:
+```julia
+using Lenia
+create_life(64, 100)
 ```
+For more information about the parameters, please refer to the [documentation](https://jindrzuz.github.io/Lenia.jl/dev).
+
+
+## Benchmark
+Comparison of execution times between Python and Julia implementations. The function tested is the update function , which updates the matrix A during the lifetime. The compared implementations can be found in the scripts folder (julia_benchmark.jl, Lenia.py)
+
+#### Random matrix A and kernel K (20x20):
+| Resolution of A | Time Python [ms] | Time Julia -median [ms] |
+|-----------------|:----------------:|:-----------------------:|
+| 100x100         |       13.598     |           2.298         |
+| 500x500         |    1 401.755     |          72.718         |
+| 1000x1000       |   21 103.500     |         280.456         |
+
+#### Examples:
+| Example name    | Time Python [ms] | Time Julia -median [ms] |
+|-----------------|:----------------:|:-----------------------:|
+| Pulsar          |      311.087     |         25.453          |
+| Spiral          |      395.791     |         32.870          |
+| Dying block     |      164.123     |          8.603          |
 
 ## Examples
 Examples of use available in the folder **scripts**.
@@ -89,19 +120,5 @@ Examples of use available in the folder **scripts**.
   </tr>
 </table>
 
-## Benchmark
-Comparison of execution times between Python and Julia implementations. The function tested is the update function , which updates the matrix A during the lifetime. 
 
-#### Random matrix A and kernel K (20x20):
-| Resolution of A | Time Python [ms] | Time Julia -median [ms] |
-|-----------------|:----------------:|:-----------------------:|
-| 100x100         |       13.598     |           2.298         |
-| 500x500         |    1 401.755     |          72.718         |
-| 1000x1000       |   21 103.500     |         280.456         |
 
-#### Examples:
-| Example name    | Time Python [ms] | Time Julia -median [ms] |
-|-----------------|:----------------:|:-----------------------:|
-| Pulsar          |      311.087     |         25.453          |
-| Spiral          |      395.791     |         32.870          |
-| Dying block     |      164.123     |          8.603          |

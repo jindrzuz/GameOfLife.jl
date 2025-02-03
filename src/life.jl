@@ -157,10 +157,10 @@ Initialize matrix A.
 
 # Arguments
 - `Asize::Integer`: Size of matrix A.
-- `pattern_name::String`: Name of pattern.
+- `pattern_name::String`: Name of pattern ['pulsar', 'dying_block', 'spiral'].
 - `cx::Integer`: Position of pattern.
 - `cy::Integer`: Position od pattern.
-- `scale_::Integer`: Parameter.
+- `scale_::Integer`: Scale parameter.
 
 # Returns
 - `Matrix{Float64}`: Initialized matrix.
@@ -190,7 +190,7 @@ end
 Load pattern.
 
 # Arguments
-- `name::String`: Name of pattern.
+- `name::String`: Name of pattern ['pulsar', 'dying_block', 'spiral'].
 
 # Returns
 - `Tuple{Integer, Integer, Real, Real}`: Pattern.
@@ -211,17 +211,17 @@ Create life.
 # Arguments
 - `Asize::Integer`: Size of matrix A.
 - `n::Integer`: Number of iterations.
-- `pattern_name::String`: Name of pattern.
-- `cx::Integer`: Parameter.
-- `cy::Integer`: Parameter.
-- `scale_::Integer`: Parameter.
+- `pattern_name::String`: Name of pattern ['pulsar', 'dying_block', 'spiral'].
+- `cx::Integer`: Position of pattern.
+- `cy::Integer`: Position of pattern.
+- `scale_::Integer`: Scale parameter.
 
 """
 function create_life(Asize::Integer, n::Integer, pattern_name::String, cx::Integer, cy::Integer, scale_::Integer)
     R, T, m, s = load_pattern(pattern_name)
 
-    if 2*R+1 > Asize
-        error("R is too big for the matrix")
+    if cx <= 0 || cy <= 0 || scale_ <= 0 || Asize <= 0 || n <= 0
+        error("Parameters have to be positive")
     end
 
     A = initial_A(Asize, pattern_name, cx, cy, scale_)
@@ -239,4 +239,96 @@ function create_life(Asize::Integer, n::Integer, pattern_name::String, cx::Integ
     end
 end
 
+"""
+    create_life(A::Matrix{V}, K::Matrix{V}, n::Integer, m=0.5, s=0.15, T = 10) where V
+
+Create life.
+
+# Arguments
+- `A::Matrix{V}`: Matrix A.
+- `K::Matrix{V}`: Kernel K.
+- `n::Integer`: Number of iterations.
+- `T::Real`: Parameter.
+- `m::Real`: Parameter.
+- `s::Real`: Parameter.
+
+"""
+function create_life(A::Matrix{V}, K::Matrix{V}, n::Integer, T = 10, m=0.5, s=0.15) where V
+    if size(K)[1] > size(A)[1]
+        error("Kernel K is too big for the matrix")
+    end
+
+    if !all(0 .<= A .<= 1)
+        error("Matrix A has to be in range (0, 1)")
+    end
+
+    if !all(0 .<= K .<= 1)
+        error("Kernel K has to be in range (0, 1)")
+    end
+
+    if size(K)[1]%2 == 0
+        error("Kernel K has to have odd size")
+    end
+
+    if size(K)[1] != size(K)[2]
+        error("Kernel K has to be square")
+    end
+
+    if size(A)[1] != size(A)[2]
+        error("Matrix A has to be square")
+    end
+
+    if (T <= 0 || m <= 0 || s <= 0 || n <= 0)
+        error("Parameters have to be positive")
+    end
+
+    fig = Figure(size = (600, 600))
+    ax = Makie.Axis(fig[1, 1])
+    heatmap!(ax, display_matrix(A))
+    display(fig) 
+    
+    for _ in 1:n
+        A = update(A, K, T, m, s)
+        heatmap!(ax, display_matrix(A)) 
+        sleep(0.1)
+    end
+end
+
+"""
+    create_life(Asize::Integer, n::Integer, R=20, T=10, m=0.5, s=0.15)
+
+Create life.
+
+# Arguments
+- `Asize::Integer`: Size of matrix A.
+- `n::Integer`: Number of iterations.
+- `R::Integer`: Parameter.
+- `T::Integer`: Parameter.
+- `m::Real`: Parameter.
+- `s::Real`: Parameter.
+
+"""
+function create_life(Asize::Integer, n::Integer, R=20, T=10, m=0.5, s=0.15)
+    if 2*R+1 > Asize
+        error("R is too big for the matrix")
+    end
+
+    if T <= 0 || m <= 0 || s <= 0 || R <= 0 || Asize <= 0 || n <= 0
+        error("Arguments have to be positive")
+    end
+
+    A = rand(Asize, Asize)
+    K = compute_kernel(R)
+
+    fig = Figure(size = (600, 600))
+    ax = Makie.Axis(fig[1, 1])
+    heatmap!(ax, display_matrix(A))
+    display(fig) 
+    
+    for _ in 1:n
+        A = update(A, K, T, m, s)
+        heatmap!(ax, display_matrix(A)) 
+        sleep(0.1)
+    end
+end
 

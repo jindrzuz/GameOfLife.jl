@@ -12,6 +12,16 @@ Lenia is inspired by the concept of cellular automata but takes a continuous app
 
 This Julia package implements basic functionality for simulating the growth of cells and applying kernel-based transformations to model the behavior of such organisms. It also provides tools for visualizing the evolution of the system over time.
 
+## Installation
+
+To install the package, simply run the following command in Julia's REPL:
+
+```
+using Pkg
+
+Pkg.add(url = "https://github.com/jindrzuz/Lenia.jl")
+```
+
 ## Algorithm
 
 1. **Matrix Representation**:
@@ -39,15 +49,6 @@ This Julia package implements basic functionality for simulating the growth of c
 6. **Visualization**
     - The state of the matrix is visualized using **heatmaps** to show the density and evolution of cells over time. The matrix is updated and displayed at each iteration.
 
-## Installation
-
-To install the package, simply run the following command in Julia's REPL:
-
-```
-using Pkg
-
-Pkg.add(url = "https://github.com/jindrzuz/Lenia.jl")
-```
 
 ## Examples
 Examples of use available in the folder **scripts**.
@@ -60,7 +61,7 @@ Examples of use available in the folder **scripts**.
 
 
 ## Benchmark
-Comparison of execution times between Python and Julia implementations. The function tested is the update function , which updates the matrix A during the lifetime. 
+Comparison of execution times between Python and Julia implementations. The function tested is the update function , which updates the matrix A during the lifetime. The compared implementations can be found in the scripts folder (julia_benchmark.jl, Lenia.py)
 
 #### Random matrix A and kernel K (20x20):
 | Resolution of A | Time Python [ms] | Time Julia -median [ms] |

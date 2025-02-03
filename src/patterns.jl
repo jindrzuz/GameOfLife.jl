@@ -8,7 +8,6 @@ pattern["pulsar"] = Dict(
     "T" => 8,
     "m" => 0.12,
     "s" => 0.02,
-    "b" => [1],
     "cells" => [
         0 0 0 0.1 0.2 0.3 0.4 0.3 0.2 0.1 0 0 0 0 0;
         0 0 0.1 0.3 0.5 0.7 0.9 0.7 0.5 0.3 0.1 0 0 0 0;
@@ -29,11 +28,10 @@ pattern["pulsar"] = Dict(
 
 pattern["dying_block"] = Dict(
     "name" => "Dying Block",
-    "R" => 20,         # Větší dosah pro pohyb a ovlivnění okolí
-    "T" => 50,         # Délka životnosti objektu
-    "m" => 0.4,        # Tvar objektu
-    "s" => 0.05,       # Tvar se nerozpadá, ale je pevný
-    "b" => [1],
+    "R" => 20,   
+    "T" => 50,        
+    "m" => 0.4,       
+    "s" => 0.05,      
     "cells" => [
         0 0 0 0 0 0 0 0 0 0;
         0 0 0 0 0 0 0 0 0 0;
@@ -51,11 +49,10 @@ pattern["dying_block"] = Dict(
 
 pattern["spiral"] = Dict(
     "name" => "Spiral",
-    "R" => 20,  # Maximální dosah pro ovlivnění okolí
-    "T" => 12,  # Délka životnosti objektu
-    "m" => 0.1,  # Tvar objektu
-    "s" => 0.03, # Šířka rozptylu
-    "b" => [1],
+    "R" => 20,  
+    "T" => 12,  
+    "m" => 0.1,  
+    "s" => 0.03,
     "cells" => [
         0 0 0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.35 0.3 0.25 0.2;
         0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.45 0.4 0.35 0.3;
@@ -71,3 +68,4 @@ pattern["spiral"] = Dict(
         0 0.55 0.6 0.65 0.7 0.75 0.8 0.85 0.9 0.95 1.0 0.95 0.9 0.85 0.8;
     ]
 )
+

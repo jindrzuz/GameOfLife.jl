@@ -1,4 +1,4 @@
-@testset "test_kenel" begin
+@testset "test_kernel" begin
     @testset "kernel_square" begin
         for R in 3:10
             K = compute_kernel(R)
