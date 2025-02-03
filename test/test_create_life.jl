@@ -9,7 +9,7 @@
         @test_throws ErrorException create_life(5, 2, "pulsar", 10, 10, 2)     # Pattern is too big for the matrix
         @test_throws ErrorException create_life(rand(200, 200), rand(60, 60), 2) # Size of kernel is not odd
         @test_throws ErrorException create_life(rand(10, 10), rand(51, 51), 2)   # Kernel is too big for the matrix A
-        @test_throws ErrorException create_life(rand(100, 100), rand(20, 21), 2) # Kernel is not square
+        @test_throws ErrorException create_life(rand(100, 100), rand(21, 20), 2) # Kernel is not square
         @test_throws ErrorException create_life(rand(100, 60), rand(21, 21), 2)  # Matrix is not square
         @test_throws ErrorException create_life(rand(100, 60), rand(21, 21), -2) # Negative number of iterations
         @test_throws ErrorException create_life(rand(100, 100), rand(21, 21), 2, -10) # Negative parameter T

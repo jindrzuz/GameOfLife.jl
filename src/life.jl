@@ -266,12 +266,12 @@ function create_life(A::Matrix{V}, K::Matrix{V}, n::Integer, T = 10, m=0.5, s=0.
         error("Kernel K has to be in range (0, 1)")
     end
 
-    if size(K)[1]%2 == 0
-        error("Kernel K has to have odd size")
-    end
-
     if size(K)[1] != size(K)[2]
         error("Kernel K has to be square")
+    end
+    
+    if size(K)[1]%2 == 0
+        error("Kernel K has to have odd size")
     end
 
     if size(A)[1] != size(A)[2]
